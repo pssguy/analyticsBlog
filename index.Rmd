@@ -1,0 +1,157 @@
+---
+title: "Analytics Blog"
+author: "mytinyshinys"
+date: "March 3, 2016"
+output:
+  html_document:
+    fig_caption: yes
+    theme: journal
+    toc: yes
+    code_folding: hide
+css: custom.css
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+```
+
+```{r libraries, echo=TRUE, include= FALSE}
+# # libraries required
+# 
+# ## check for packages
+# packages <- c("markdown", "shiny", "shinydashboard", "stringr", "dplyr", "tidyr", "DT", "readr", "plotly", "rsconnect")
+# if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+#   install.packages(setdiff(packages, rownames(installed.packages())))  
+# }
+# 
+# # rsconnect is not on CRAN
+# 
+# if (!require("devtools"))
+#   install.packages("devtools")
+# devtools::install_github("rstudio/rsconnect")
+# 
+# 
+# library(markdown)
+# library(shiny)
+# library(shinydashboard)
+# 
+# library(stringr)
+# library(dplyr) 
+# 
+# library(tidyr)
+# library(DT)
+# library(readr)
+# library(plotly)
+# library(rsconnect)
+
+```
+
+
+## shinyapps.io
+
+This is first in planned series of blogs usually related to apps I develop for the [mytinyshinys site](https://mytinyshinys.shinyapps.io/dashboard/) focusing on amalysing meta data. 
+Commented out code can be shown or hidden by toggling buttons
+
+
+For those of you distributing shiny apps using  [RStudio shinyapps.io](https://www.shinyapps.io/), the [rsconnect](https://github.com/rstudio/rsconnect) package provides some metrics on package use
+
+I have developed a small app for users to check their own information by inputting their account name and then any of their apps via input boxes. The full code can be viewed on [github](https://github.com/pssguy/shinyAppsAnalytics)
+
+```{r table, echo=TRUE}
+
+# # creative a reactive 
+# data <- eventReactive (input$go,{
+#   
+#   req(input$account)
+#   
+#   # this is key function with a split of the datetime field returned
+#   apps <- applications(input$account) %>% 
+#        mutate(created=str_sub(created_time,1,10),last_active=str_sub(updated_time,1,10))
+#   
+#   apps$name <- as.character(apps$name)
+#   apps$status <- as.character(apps$status)
+#   
+#  
+#   choices <- sort(apps$name)
+#   
+#   info=list(apps=apps,choices=choices)
+#   return(info)
+# 
+# })  
+#  # render a datatable with selected fields 
+#   output$appsTable <- DT::renderDataTable({
+#  
+#   
+# data()$apps %>%
+#     select(name,status,created,last_active) %>% 
+#      arrange(desc(last_active)) %>%  
+#   DT::datatable(class='compact stripe hover row-border order-column',rownames=FALSE,options= list(paging = TRUE, searching = TRUE,info=FALSE))
+# })
+
+
+```
+
+This provides a table with apps listed with data on whether they are running and when created
+
+![](images/shinyAppsTable.png)
+
+You can then select a package to view active hours by day - currently just over preceding month
+
+```{r tabsets, echo=TRUE}
+# appData <- eventReactive (input$getChart,{
+#   
+#   req(input$app)
+#   req(input$account)
+#   
+#   # key function - there are some variables which i may include in future release
+#   appInfo <- showUsage(appDir = getwd(), appName = input$app, account = input$account,
+#                                 server = NULL, usageType = "hours", from = NULL, until = NULL,
+#                                 interval = NULL)
+#   
+#   
+#   
+#   appInfo$time <- as.POSIXct(appInfo$timestamp, origin="1970-01-01")
+#   
+# 
+#   
+#   ## the data returned often has 2 values for an hour - one of which is zero
+#   appInfo <-appInfo %>% 
+#     arrange(time) %>% 
+#     filter(hours!=0.00) %>% 
+#     mutate(date=as.Date(str_sub(time,1,10)),hr=as.integer(str_sub(time,12,13)))
+#   
+# })
+# 
+# output$appChart <- renderPlotly({
+#   
+#   
+#   # Need to account for days where there are zero active hours
+#   start <- min(appData()$date) 
+#   end <- max(appData()$date)
+#   allDates <- data.frame(date=seq(start, end, by = "days"))
+#   
+#  
+#   appData() %>% 
+#     group_by(date) %>% 
+#     summarize(totTime=sum(hours)) %>% 
+#     right_join(allDates) %>% 
+#     mutate(hrs=ifelse(is.na(totTime),0,totTime)) %>% 
+#     plot_ly(x=date,y=hrs,markers="lines")%>% 
+#       layout(hovermode = "closest",
+#              xaxis=list(title=" "),
+#              yaxis=list(title="Hours per Day")
+#       )
+#   
+# })
+```
+
+
+A simple graph is produced. I tend to use plotly by default
+
+![](images/shinyAppsChart.png)
+
+
+With the shiny package loaded, run ` runGitHub("shinyAppsAnalytics", "pssguy")` in your console
+
+As mentioned above, all the code is on a [github repo](https://github.com/pssguy/shinyAppsAnalytics) so you can enhance and extend as required
