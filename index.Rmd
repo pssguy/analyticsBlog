@@ -20,7 +20,8 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
 # # libraries required
 # 
 # ## check for packages
-# packages <- c("markdown", "shiny", "shinydashboard", "stringr", "dplyr", "tidyr", "DT", "readr", "plotly", "rsconnect")
+# packages <- c("markdown", "shiny", "shinydashboard", "stringr", "dplyr", "tidyr", "DT", "readr", "plotly",
+#               "digest", "PKI", "RCurl", "RJSONIO", "packrat", "yaml", "rstudioapi")
 # if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
 #   install.packages(setdiff(packages, rownames(installed.packages())))  
 # }
