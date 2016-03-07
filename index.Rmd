@@ -6,7 +6,8 @@ output:
   html_document:
     fig_caption: yes
     theme: journal
-    toc: yes
+    toc: true
+    toc_depth: 2
     code_folding: hide
 css: custom.css
 runtime: shiny
@@ -51,7 +52,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
 
 ## shinyapps.io
 
-This is first in planned series of blogs usually related to apps I develop for the [mytinyshinys site](https://mytinyshinys.shinyapps.io/dashboard/) focusing on amalysing meta data. 
+This is first in planned series of blogs usually related to apps I develop for the [mytinyshinys site](https://mytinyshinys.shinyapps.io/dashboard/) focusing on analysing meta data. 
 Commented out code can be shown or hidden by toggling buttons
 
 
@@ -93,9 +94,10 @@ I have developed a small app for users to check their own information by inputti
 
 ```
 
-This provides a table with apps listed with data on whether they are running and when created
+This produces a table with apps listed with info on whether they are running and when created and last used
 
 ![](images/shinyAppsTable.png)
+
 
 You can then select a package to view active hours by day - currently just over preceding month
 
@@ -148,7 +150,8 @@ You can then select a package to view active hours by day - currently just over 
 ```
 
 
-A simple graph is produced. I tend to use plotly by default
+A simple graph is produced. I tend to use plotly by default - so you can hover over to get precise figures
+when run
 
 ![](images/shinyAppsChart.png)
 
