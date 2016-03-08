@@ -1,5 +1,5 @@
 ---
-title: "Analytics Blog"
+title: "mytinyShinys - Analytics "
 author: "mytinyshinys"
 date: "March 3, 2016"
 output:
@@ -9,7 +9,7 @@ output:
     toc: true
     toc_depth: 2
     code_folding: hide
-css: custom.css
+css: customBlog.css
 runtime: shiny
 ---
 
@@ -48,12 +48,10 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
 # library(rsconnect)
 
 ```
+This is a series of short articles usually related to apps I develop for the [mytinyshinys site](https://mytinyshinys.shinyapps.io/dashboard/) focusing on metadata. 
 
-
-## shinyapps.io
-
-This is first in planned series of blogs usually related to apps I develop for the [mytinyshinys site](https://mytinyshinys.shinyapps.io/dashboard/) focusing on analysing meta data. 
-Commented out code can be shown or hidden by toggling buttons
+##  <span class="post">shinyapps.io</span>
+*7th March 2016*
 
 
 For those of you distributing shiny apps using  [RStudio shinyapps.io](https://www.shinyapps.io/), the [rsconnect](https://github.com/rstudio/rsconnect) package provides some metrics on package use
@@ -159,3 +157,20 @@ when run
 With the shiny package loaded, run ` runGitHub("shinyAppsAnalytics", "pssguy")` in your console
 
 As mentioned above, all the code is on a [github repo](https://github.com/pssguy/shinyAppsAnalytics) so you can enhance and extend as required
+
+
+###  <span class="blogs">myTinyShiny blogs</span>
+
+
+- [English Premier League](https://mytinyshinys.shinyapps.io/premierBlog)
+- [Other Sports](https://mytinyshinys.shinyapps.io/sportsBlog)
+- [Socio-Economic](https://mytinyshinys.shinyapps.io/socioEconomicsBlog)
+- [Analytics](https://mytinyshinys.shinyapps.io/analyticsBlog)
+
+
+###  <span class="blogs">Associated mytinyshiny web sites</span>
+
+
+- [Github](https://mytinyshinys.shinyapps.io/githubAnalyses)
+- [Rpubs](https://mytinyshinys.shinyapps.io/rPubs)
+- [Dashboard](https://mytinyshinys.shinyapps.io/dashboard)
